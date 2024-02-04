@@ -56,7 +56,7 @@ app.post('/notify', async (req: Request, res: Response) => {
           console.error('APNS response:', JSON.stringify(failure.response));
         }
       });
-      res.status(500).json({ message: "Failed to send notification", details: result.failed });
+      return res.status(500).json({ message: "Failed to send notification", details: result.failed });
     } else {
       res.json({ message: "Notification sent successfully" });
     }
