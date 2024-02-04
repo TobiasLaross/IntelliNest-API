@@ -46,5 +46,3 @@ Send a POST request to /notify with the following JSON payload:
   "group": "Optional Group ID"
 }
 ```
-
-
