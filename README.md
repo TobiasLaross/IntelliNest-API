@@ -13,7 +13,7 @@ This project is the backend service for the IntelliNest app, responsible for ser
 Clone the repository and install dependencies:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/TobiasLaross/IntelliNest-API.git
 cd intellinest-backend
 npm install
 cd intellinest-backend
