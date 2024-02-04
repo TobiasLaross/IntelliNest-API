@@ -14,9 +14,9 @@ Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/TobiasLaross/IntelliNest-API.git
-cd intellinest-backend
+cd IntelliNest-API
 npm install
-cd intellinest-backend
+cd IntelliNest-API
 npm install
 ```
 
