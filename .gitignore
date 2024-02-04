@@ -1,4 +1,5 @@
 dist
+*.p8
 # Logs
 logs
 *.log
