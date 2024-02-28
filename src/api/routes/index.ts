@@ -1,1 +1,2 @@
-export { default as notifyRouts } from './notify.routes'
+export { default as notifyRoutes } from "./notify.routes";
+

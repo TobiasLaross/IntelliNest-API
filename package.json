@@ -1,6 +1,6 @@
 {
   "name": "intellinest-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "scripts": {
     "buildDeploy": "tsc && pm2 restart Notify && pm2 save",
