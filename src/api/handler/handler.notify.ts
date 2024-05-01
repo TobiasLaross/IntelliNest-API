@@ -25,9 +25,8 @@ async function handlePostNotify(req: Request, res: Response) {
         },
         sound: "default",
         topic: "se.laross.IntelliNest",
-        category: req.body.data.category,
-        "thread-id": req.body.data.group,
-        // ...(req.body.group && { "thread-id": req.body.data.group }),
+        category: req.body.data.category || "defaultCategory",
+        threadId: req.body.data.group || "defaultGroup",
     });
     console.log(formattedDate, "Received request:", req.body);
     console.log(formattedDate, "Sending notification with payload:", note);
