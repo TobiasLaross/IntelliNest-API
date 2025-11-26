@@ -18,7 +18,7 @@ async function handlePostNotify(req: Request, res: Response) {
     const formattedDate = `${now.getHours()}:${now.getMinutes()} (${now.getDate()}/${now.getMonth()})`;
     let isProductionEnvironment = true;
     let apnProvider = createApnProvider(isProductionEnvironment);
-    let note = new apn.Notification({
+    let notification = new apn.Notification({
         alert: {
             title: req.body.title,
             body: req.body.message,
@@ -28,11 +28,20 @@ async function handlePostNotify(req: Request, res: Response) {
         category: req.body.data.category || "defaultCategory",
         threadId: req.body.data.group || "defaultGroup",
     });
+
+    if (req.body?.data?.sound?.critical === true) {
+        notification.sound = {
+            critical: 1,
+            name: "default",
+            volume: 1.0,
+        };
+    }
+
     console.log(formattedDate, "Received request:", req.body);
-    console.log(formattedDate, "Sending notification with payload:", note);
+    console.log(formattedDate, "Sending notification with payload:", notification);
 
     try {
-        let result = await apnProvider.send(note, deviceToken);
+        let result = await apnProvider.send(notification, deviceToken);
         const badDeviceTokenError = result.failed.find(
             (failure) => failure.response?.reason === "BadDeviceToken",
         );
@@ -44,7 +53,7 @@ async function handlePostNotify(req: Request, res: Response) {
             );
             isProductionEnvironment = !isProductionEnvironment; // Toggle the flag based on error
             apnProvider = createApnProvider(isProductionEnvironment);
-            result = await apnProvider.send(note, deviceToken);
+            result = await apnProvider.send(notification, deviceToken);
         }
 
         if (result.failed.length > 0) {
