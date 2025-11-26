@@ -29,17 +29,16 @@ async function handlePostNotify(req: Request, res: Response) {
         threadId: req.body?.data?.group ?? "defaultGroup",
     });
 
-    if (req.body?.data?.sound?.critical === true) {
+    if (req.body?.data?.push?.sound?.critical === 1) {
         notification.sound = {
             critical: 1,
-            name: "default",
-            volume: 1.0,
+            name: req.body?.data?.push?.sound?.name ?? "default",
+            volume: req.body?.data?.push?.sound?.volume ?? 1.0,
         };
     }
 
     console.log(formattedDate, "Received request:", req.body);
     console.log(formattedDate, "Sending notification with payload:", notification);
-    console.log(formattedDate, "Sending notification with sound payload:", notification.sound);
 
     try {
         let result = await apnProvider.send(notification, deviceToken);
