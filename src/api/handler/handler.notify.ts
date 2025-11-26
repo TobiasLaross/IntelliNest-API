@@ -25,8 +25,8 @@ async function handlePostNotify(req: Request, res: Response) {
         },
         sound: "default",
         topic: "se.laross.IntelliNest",
-        category: req.body.data.category || "defaultCategory",
-        threadId: req.body.data.group || "defaultGroup",
+        category: req.body?.data?.category ?? "defaultCategory",
+        threadId: req.body?.data?.group ?? "defaultGroup",
     });
 
     if (req.body?.data?.sound?.critical === true) {
@@ -39,6 +39,7 @@ async function handlePostNotify(req: Request, res: Response) {
 
     console.log(formattedDate, "Received request:", req.body);
     console.log(formattedDate, "Sending notification with payload:", notification);
+    console.log(formattedDate, "Sending notification with sound payload:", notification.sound);
 
     try {
         let result = await apnProvider.send(notification, deviceToken);
