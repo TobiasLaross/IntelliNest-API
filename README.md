@@ -47,7 +47,9 @@ Send a POST request to /notify with the following JSON payload:
 
 ## Live Activity updates
 
-Keeps the IntelliNest music Live Activity current while the app is closed.
+Keeps the IntelliNest music Live Activity current while the app is closed. Every request needs
+`Authorization: Bearer <INTELLINEST_API_SECRET>`; set `INTELLINEST_API_SECRET` in `.env` (the routes refuse all
+requests without it).
 
 - `POST /live-activity/register` with `{ push_token, device_token, content_state }`: sent by the app whenever it
   starts or updates the activity. `push_token` is the activity's ActivityKit token, `device_token` the app's
