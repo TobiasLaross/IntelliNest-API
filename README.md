@@ -44,3 +44,17 @@ Send a POST request to /notify with the following JSON payload:
   "group": "Optional Group ID"
 }
 ```
+
+## Live Activity updates
+
+Keeps the IntelliNest music Live Activity current while the app is closed.
+
+- `POST /live-activity/register` with `{ push_token, device_token, content_state }`: sent by the app whenever it
+  starts or updates the activity. `push_token` is the activity's ActivityKit token, `device_token` the app's
+  APNs token (used for a background push that lets the app fetch new album art).
+- `POST /live-activity/unregister` with `{ push_token }`: sent when the activity ends.
+- `POST /live-activity/media-state` with `{ entity_id, state, attributes }`: sent by a Home Assistant automation
+  on every `media_player` change. The relay turns it into a `liveactivity` push for each registered activity
+  that follows that speaker.
+
+Run the tests with `npm test`.
